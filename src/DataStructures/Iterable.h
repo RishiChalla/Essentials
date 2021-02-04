@@ -17,17 +17,24 @@
 #pragma once
 
 #include "Iterator.h"
-#include "Iterable.h"
-#include "Container.h"
-#include "List.h"
-#include "Array.h"
-#include "LinkedList.h"
-#include "ArrayList.h"
-#include "Tree.h"
-#include "BinaryTree.h"
-#include "BinarySearchTree.h"
-#include "Heap.h"
-#include "Graph.h"
-#include "HashMap.h"
-#include "Queue.h"
-#include "Stack.h"
+
+/**
+ * The main namespace for data structures in the essentials library
+ */
+namespace Essentials::DataStructures {
+
+	/**
+	 * A namespace alias to the data structures namespace
+	 */
+	namespace ds = DataStructures;
+
+	class Iterable {
+	public:
+
+	};
+}
+
+/**
+ * A namespace alias to the Essentials namespace
+ */
+namespace es = Essentials;
