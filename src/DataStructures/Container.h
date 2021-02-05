@@ -33,8 +33,9 @@ namespace Essentials::DataStructures {
 	public:
 		/**
 		 * Returns the length of the data structure
+		 * @returns The length of the data structure
 		 */
-		virtual unsigned int length() = 0;
+		virtual size_t length() const = 0;
 	};
 }
 

@@ -16,18 +16,35 @@
 
 #pragma once
 
+// Iterators
 #include "Iterator.h"
 #include "Iterable.h"
+
+// Containers
 #include "Container.h"
-#include "List.h"
 #include "Array.h"
+
+// Lists
+#include "List.h"
 #include "LinkedList.h"
 #include "ArrayList.h"
+
+// Stacks
+#include "Stack.h"
+#include "LinkedStack.h"
+#include "ArrayStack.h"
+
+// Queues
+#include "Queue.h"
+#include "LinkedQueue.h"
+#include "ArrayQueue.h"
+
+// Trees
 #include "Tree.h"
 #include "BinaryTree.h"
 #include "BinarySearchTree.h"
 #include "Heap.h"
+
+// Other
 #include "Graph.h"
 #include "HashMap.h"
-#include "Queue.h"
-#include "Stack.h"
