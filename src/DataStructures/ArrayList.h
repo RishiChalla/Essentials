@@ -59,11 +59,15 @@ namespace Essentials::DataStructures {
 			if (newCap < size)
 				size = newCap;
 
-			for (size_t i = 0; i < size; i++)
+			for (size_t i = 0; i < size; i++) {
 				newBlock[i] = std::move(data[i]);
+			}
+
+			for (size_t i = 0; i < size; i++) {
+				data[i].~T();
+			}
 			
-			if (data != nullptr)
-				delete[] data;
+			delete[] data;
 			data = newBlock;
 			cap = newCap;
 		}
@@ -89,6 +93,7 @@ namespace Essentials::DataStructures {
 		 * Frees resources
 		 */
 		~ArrayList() {
+			clear();
 			delete[] data;
 		}
 
@@ -159,6 +164,7 @@ namespace Essentials::DataStructures {
 				data[i+1] = std::move(data[i]);
 			
 			data[index] = item;
+			size++;
 		}
 
 		/**
@@ -174,6 +180,7 @@ namespace Essentials::DataStructures {
 				data[i+1] = std::move(data[i]);
 			
 			data[index] = std::move(item);
+			size++;
 		}
 
 		/**
@@ -183,7 +190,7 @@ namespace Essentials::DataStructures {
 		T& emplace(Args&&... args) {
 			if (size >= cap)
 				realloc(cap + cap / 2);
-			data[size] = T(std::forward<Args>(args)...);
+			new(&data[size]) T(std::forward<Args>(args)...);
 			size++;
 			return data[size - 1];
 		}
@@ -214,33 +221,17 @@ namespace Essentials::DataStructures {
 				else
 					data[i-count] = std::move(data[i]);
 			}
-			size--;
+			size -= count;
 		}
 
 		/**
-		 * Removes an element from the list
-		 * @param item The element to remove
-		 * @returns Whether or not the element was removed (false if the element wasn't in the list)
+		 * Completely removes all items in the list
 		 */
-		bool remove(const T& item) {
-			int index = indexOf(item);
-			if (index == -1)
-				return false;
-			remove(index);
-			return true;
-		}
-
-		/**
-		 * Removes a list of items from the list
-		 * @param items The items to remove from the list
-		 * @returns Whether or not all the items were successfully removed (Returns false if any were not found)
-		 */
-		bool remove(const List<T>& items) {
-			bool found = true;
-			for (size_t i = 0; i < items.length(); i++) {
-				if (!remove(items[i])) found = false;
+		void clear() {
+			for (size_t i = 0; i < size; i++) {
+				data[i].~T();
 			}
-			return found;
+			size = 0;
 		}
 
 		/**
@@ -256,7 +247,7 @@ namespace Essentials::DataStructures {
 		 * @param num The number of items to prepare for
 		 */
 		void prepare(size_t num) {
-			if (size + num < cap)
+			if (size + num > cap)
 				realloc(size + num);
 		}
 

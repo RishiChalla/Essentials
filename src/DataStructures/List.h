@@ -93,18 +93,9 @@ namespace Essentials::DataStructures {
 		virtual void remove(size_t index, size_t count) = 0;
 
 		/**
-		 * Removes an element from the list
-		 * @param item The element to remove
-		 * @returns Whether or not the element was removed (false if the element wasn't in the list)
+		 * Completely clears all items in the list
 		 */
-		virtual bool remove(const T& item) = 0;
-
-		/**
-		 * Removes a list of items from the list
-		 * @param items The items to remove from the list
-		 * @returns Whether or not all the items were successfully removed (Returns false if any were not found)
-		 */
-		virtual bool remove(const List<T>& items) = 0;
+		virtual void clear() = 0;
 
 		/**
 		 * Checks if an index is valid for the list
