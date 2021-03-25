@@ -16,7 +16,6 @@
 
 #pragma once
 
-#include "Container.h"
 #include <assert.h>
 
 /**
@@ -31,15 +30,14 @@ namespace Essentials::DataStructures {
 
 	/**
 	 * A data structure representing a list
+	 * (Does not inherit from container to satisfy aggregate conditions)
 	 */
-	template<typename T, size_t L> class Array : public Container<T> {
-	private:
+	template<typename T, size_t L> class Array {
+	public:
 		/**
 		 * The data of the array
 		 */
 		T data[L];
-
-	public:
 
 		/**
 		 * Gets an element from the list at an index
